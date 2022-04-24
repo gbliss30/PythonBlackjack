@@ -1,4 +1,4 @@
-import os
+import os, random
 
 from art import logo, deck
 from game import Game
@@ -23,10 +23,13 @@ except TypeError:
     print("Invalid bet, defaulting to $100 hands")
     bet = 100
 
+random.shuffle(local_deck)
+
 while True:
     game = Game(local_deck, bet)
     game.display_cards()
     result = game.choice()
+    game.return_cards()
     while True:
         game_choice = input("Would you like to play again? (y/n): ")
         if game_choice not in ('y', 'n'):

@@ -1,5 +1,4 @@
 import os
-import random
 import time
 
 from art import logo
@@ -36,9 +35,16 @@ class Game:
         money -= self.bet
 
     def draw_card(self):
-        card = random.choice(self.card_deck)
+        card = self.card_deck[0]
         self.card_deck.remove(card)
         return card
+
+    def return_cards(self):
+        for card in self.dealer_hand:
+            self.card_deck.append(card)
+        for card in self.player_hand:
+            self.card_deck.append(card)
+        self.dealer_hand, self.player_hand = [], []
 
     def evaluate_hand(self, hand):
         hand_value = 0
